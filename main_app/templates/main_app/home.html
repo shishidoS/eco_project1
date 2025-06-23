@@ -1,0 +1,29 @@
+{% extends 'main_app/layout.html' %}
+<!-- main_app/layout.htmlに埋め込む部分です。編集などの可用性の観点からこのように分割します -->
+{% block content %}
+    <h2>ホーム</h2>
+    <p>ようこそ、{{ user.username }}さん！</p><!-- {{データベースの中身}}ではデータベースに事前に保存したusernameを持ってきます -->
+    <h1>ここに＜imag src＞でキャラ画像などを挿入！</h1>
+    {% if character %}
+        <p>現在の累計ポイント: {{ character.total_points }}</p>
+    {% endif %}
+
+    <hr>
+
+    {% if record_exists %}<!-- record_exists が True（＝今日の DailyRecord がすでに存在なら動作 -->
+        <h3>今日の記録は完了済みです！</h3>
+        <p>明日また、エコ活動を記録しに来てくださいね。</p>
+    {% else %}
+        <h3>今日のエネルギー計測</h3>
+        <p>今日実践したエコ活動にチェックを入れてください。</p>
+        
+        <form method="post">
+            {% csrf_token %}<!-- csrf_token を挿入、クロスサイトリクエストフォージェリ対策のDjangoのセキュリティ標準 -->
+            
+            {{ form.as_p }}<!-- {{ form.as_p }} でフォームの各フィールド（チェックボックス）が <p> タグでラップされた形で表示されます -->
+            
+            <button type="submit">今日の頑張りを記録する</button>
+        </form>
+    {% endif %}
+
+{% endblock %}

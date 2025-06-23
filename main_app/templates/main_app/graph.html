@@ -1,0 +1,27 @@
+{% extends 'main_app/layout.html' %}
+<!-- main_app/layout.htmlに埋め込む部分です。編集などの可用性の観点からこのように分割します-->
+{% block content %}<!-- ページごとの中身を記述-->
+    <h2>これまでの記録</h2>
+    
+    {% if records %}<!-- 記録が存在するかどうか -->
+    <table>
+        <thead>
+            <tr>
+                <th>日付</th>
+                <th>獲得ポイント</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in records %}<!-- 全てのデータを1行ずつ分割し下のコードで表示していく、あるだけ表示を行う -->
+            <tr>
+                <td>{{ record.record_date }}</td><!-- 記録された日付 -->
+                <td>{{ record.points_earned }}</td><!-- その日に獲得したポイント -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>まだ記録がありません。ホーム画面から最初の記録をしてみましょう！</p>
+    {% endif %}
+    
+{% endblock %}

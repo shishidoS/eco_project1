@@ -1,0 +1,36 @@
+{% load static %}
+<!-- 全てのページで共通して使うヘッダー、ナビゲーション、フッターなどを定義する大枠のテンプレートです -->
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>エコ育成アプリ</title>
+    <link rel="stylesheet" href="{% static 'main_app/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>エコ育成アプリ</h1>
+        <nav>
+            <a href="{% url 'home' %}">ホーム</a><!-- home.htmlの内容をここに埋め込みます -->
+
+            <a href="{% url 'graph' %}">これまでの記録</a><!-- graph.htmlの内容を埋め込み連結させます -->
+            {% if user.is_authenticated %}
+                <span>{{ user.username }}さん</span>
+                <a href="/accounts/logout/">ログアウト</a>
+            {% else %}
+                <a href="/accounts/login/">ログイン</a>
+            {% endif %}
+        </nav>
+    </header>
+    <hr>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    <hr>
+    <footer>
+        <p>&copy; 2025 Eco  Team</p>
+    </footer>
+</body>
+</html>
