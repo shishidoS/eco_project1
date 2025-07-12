@@ -15,9 +15,17 @@ class DailyRecord(models.Model):# 日々のエコ行動を記録するモデル
     points_earned = models.IntegerField(default=0)# 獲得したポイントを保存するフィールド
     
     # 質問項目を定義するフィールドです種類増やしたい場合ここを増やす
-    gas_q1 = models.BooleanField(default=False, verbose_name="エコバッグを使った")
-    water_q1 = models.BooleanField(default=False, verbose_name="こまめに水を止めた")
-    power_q1 = models.BooleanField(default=False, verbose_name="衣服で温度調整をした")
+    gas_q1 = models.BooleanField(default=False, verbose_name="エコバッグを使った")# レジ袋を使わないことで石油使用量を減らした
+    gas_q2 = models.BooleanField(default=False, verbose_name="近場に行くときは車を使用しなかった")# ガソリンを使わないことで石油使用量を減らした
+    gas_q3 = models.BooleanField(default=False, verbose_name="食べ残しをしないことで食品ロスを減らした")# 食べ残しは可燃ごみなのでガスの発生源を減らした
+
+    water_q1 = models.BooleanField(default=False, verbose_name="こまめに水を止めた")# 水の使用量を減らした
+    water_q2 = models.BooleanField(default=False, verbose_name="洗い物はまとめて行った")# 水の使用量を減らした
+    water_q3 = models.BooleanField(default=False, verbose_name="家族で風呂に入る時間を連続になるよう揃えた")# 水使用量の削減、追い炊きによるガス削減
+
+    power_q1 = models.BooleanField(default=False, verbose_name="衣服で温度調整をした")# 電力削減
+    power_q2 = models.BooleanField(default=False, verbose_name="換気を活用してエアコンの使用量を減らした")# 電力削減
+    power_q3 = models.BooleanField(default=False, verbose_name="昼間は電気をつけず、自然光の明るさで過ごした") # 電力削減
 
     class Meta:
         # 同じ日に複数記録できないように制約を設定（重複登録などをできなくします）
