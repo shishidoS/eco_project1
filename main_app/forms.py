@@ -6,4 +6,4 @@ class DailyRecordForm(forms.ModelForm):# 日々のエコ行動を記録するフ
     class Meta:
         model = DailyRecord
         # フォームに表示するフィールドを指定
-        fields = ['gas_q1', 'water_q1', 'power_q1']
+        fields = ['gas_q1', 'gas_q2','gas_q3','water_q1','water_q2','water_q3', 'power_q1', 'power_q2', 'power_q3']
